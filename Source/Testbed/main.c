@@ -1,14 +1,14 @@
 #include <stdio.h>
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
 #include "events/events.h"
 #include "game/game.h"
 #include "core/entry.h"
 #include "defines/defines.h"
 
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/Application/Vulkan/GtVkApp.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Platform/GtPlatform.h>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/Vulkan/GtVkApp.h>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Platform/GtPlatform.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Math/Algebra/Vectors/Vector3/GtVector3.h>
 
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Math/Algebra/Vectors/Vector3/GtVector3.h>
 
 int main(void) {
        GameState state;

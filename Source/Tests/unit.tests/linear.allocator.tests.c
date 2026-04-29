@@ -1,6 +1,6 @@
 #include "linear.allocator.tests.h"
 
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/LinearAllocator/GtLinearAlloc.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/LinearAllocator/GtLinearAlloc.h>
 #include "../test_manager.h"
 #include "../defines.h"
 #include "../expect.h"

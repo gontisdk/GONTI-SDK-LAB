@@ -1,11 +1,85 @@
-GONTI SDK - README
+# GONTI-SDK-LAB - README
 
-Copyright (C) 2026 OXlatorty
+© 2026 OXlatorty
 
-This project is primarily licensed under the Apache License 2.0.
+Sandbox repository for experimenting with and validating features of the GONTI engine.
 
-All files in the root directory of this project are licensed under Apache 2.0, unless otherwise specified.
+---
 
-Some modules within this project are licensed separately under the GNU Lesser General Public License version 3 (LGPL-3.0). These modules have their own LICENSE and NOTICE files that detail their specific licensing terms.
+## Overview
 
-Please refer to the individual module directories for full details.
+GONTI-SDK-LAB is a sandbox repository for experimenting with and validating features of the GONTI engine. It provides a ready-to-run testbed and a suite of tests that demonstrate how the SDK is used in practice. Specifically, the Testbed showcases core engine capabilities including Vulkan-based rendering, event systems, and basic input handling.
+
+*   **Testbed**: A sample application showcasing engine features and implementation.
+*   **Tests**: A collection of unit and integration tests for engine modules.
+
+## Quick Start
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/gontisdk/GONTI-SDK-LAB.git
+    cd GONTI-SDK-LAB
+    ```
+2.  **Download Dependencies**: 
+    Go to the [Releases Page](https://github.com/gontisdk/GONTI-SDK-LAB/releases) and download the `.zip` containing the `Include/` and `Lib/` folders. This is kept separate to reduce repository size and allow for versioned SDK distribution.
+3.  **Extract Files**: 
+    Place the extracted `Include/` and `Lib/` directories directly into the `GONTI-SDK-LAB` root folder.
+4.  **Build**:
+    *   **Linux**: Execute `./make.sh`
+    *   **Windows**: Execute `make.bat`
+5.  **Run**:
+    The compiled binaries are located in `Build/bin/`.
+    *   **Testbed**: `./Build/bin/Testbed/Testbed` (or `.exe` on Windows)
+    *   **Tests**: `./Build/bin/Tests/Tests` (or `.exe` on Windows)
+
+## What this repository is NOT
+
+*   Does **NOT** contain GONTI-SDK source code.
+*   Is **NOT** a standalone engine.
+*   Is **NOT** intended for production use.
+
+## Project Structure
+
+*   **Assets/**: Raw resources including GLSL shaders.
+*   **Build/**: Build scripts (.mak), intermediate object files, and final output binaries.
+*   **Source/**: Implementation files for the Testbed and Test suite.
+*   **Include/** and **Lib/**: Required engine headers and shared libraries (manual installation required).
+
+## Prerequisites
+
+`Include/` and `Lib/` are not versioned and must be provided manually. Ensure the following directory layout is present before building:
+
+*   `Include/GONTI/GONTI-ENGINE/...`
+*   `Lib/GONTI/GONTI-ENGINE/*.so` (Linux) or `.dll/.lib` (Windows).
+
+## Building and Technical Details
+
+The project utilizes a Makefile-based build system.
+
+### Build Scripts
+*   **make.sh**: Automates environment preparation and compilation for Linux.
+*   **make.bat**: Automates the build process for Windows.
+
+### Linker Configuration
+The Makefiles use `$ORIGIN` (and relative paths on Windows) to link the `Lib/` folder. This allows the executable to find engine components without global installation, though users may modify these settings in the `.mak` files if necessary.
+
+## Example Output
+
+When running the **Tests** suite, you should see an output similar to:
+```text
+---------------------------------------
+GONTI-SDK Test Suite Starting...
+[PASSED] LinearAllocator: Allocation test
+[PASSED] LinearAllocator: Overflow protection
+[PASSED] Math: Vector3 normalization
+---------------------------------------
+All 3 tests passed successfully.
+---------------------------------------
+```
+
+## License
+
+GONTI-SDK-LAB is licensed under the **Apache License 2.0**. See the `LICENSE` file for the full text. 
+
+Note: This license applies specifically to this LAB repository. For information regarding engine contributors, refer to the `AUTHORS` file.
+```

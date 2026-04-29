@@ -1,10 +1,10 @@
 #include "test_manager.h"
 
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Containers/DynamicArray/GtDArray.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/CStringTools/GtCStrTools.h>
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/Clock/GtClock.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Memory/GtMemory.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Containers/DynamicArray/GtDArray.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/CStringTools/GtCStrTools.h>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Clock/GtClock.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Memory/GtMemory.h>
 
 typedef struct TestsEntry {
     PFN_Test func;

@@ -1,8 +1,8 @@
 #include "events.h"
 
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/Inputs/GtInputs.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Inputs/GtInputs.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
 
 GtB8 applicationOnEvent(GtU16 code, void* sender, void* listenerInst, GtEventContext context) {
     switch (code) {

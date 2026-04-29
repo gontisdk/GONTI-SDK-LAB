@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Math/GtMaths.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Math/GtMath.h>
 #include "defines.h"
 
 #define expect_should_be(expected, actual) \

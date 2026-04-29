@@ -1,8 +1,8 @@
 #pragma once
 
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
-#include <GONTI/GONTI-ENGINE/GONTI.CORE/Source/Defines/GtDefines.h>
-#include <GONTI/GONTI-ENGINE/GONTI.RUNTIME/Source/EntryPoint/GtEntry.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
+#include <GONTI-ENGINE/GONTI.CORE/Source/Defines/GtDefines.inl>
+#include <GONTI-ENGINE/GONTI.RUNTIME/Source/EntryPoint/GtEntry.h>
 
 typedef struct GameState {
     GtF32 deltaTime;
