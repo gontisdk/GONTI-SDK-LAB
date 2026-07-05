@@ -4,10 +4,10 @@
 #include "core/entry.h"
 #include "defines/defines.h"
 
-#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/Vulkan/GtVkApp.h>
-#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
-#include <GONTI-ENGINE/GONTI.CORE/Source/Platform/GtPlatform.h>
-#include <GONTI-ENGINE/GONTI.CORE/Source/Math/Algebra/Vectors/Vector3/GtVector3.h>
+#include <GONTI-RUNTIME/GONTI.RUNTIME/Source/Application/Vulkan/GtVkApp.h>
+#include <GONTI-RUNTIME/GONTI.RUNTIME/Source/Application/GtApp.h>
+#include <GONTI-CORE/GONTI.CORE/Source/Platform/GtPlatform.h>
+#include <GONTI-CORE/GONTI.MATH/Source/Algebra/Vectors/Vector3/GtVector3.h>
 
 
 int main(void) {
@@ -23,8 +23,8 @@ int main(void) {
        entry.windowConfig.className = "0xGONTIENGINE";
        entry.windowConfig.startPosX = 100;
        entry.windowConfig.startPosY = 100;
-       entry.windowConfig.startWidth = 800;
-       entry.windowConfig.startHeight = 600;
+       entry.windowConfig.startWidth = 1920;
+       entry.windowConfig.startHeight = 1080;
        entry.GtUpdateFN = gameUpdate;
        entry.GtRenderFN = gameRender;
        entry.GtFixedUpdateFN = gameFixedUpdate;

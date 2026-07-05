@@ -1,10 +1,10 @@
 #include "game.h"
 #include "../events/events.h"
 
-#include <GONTI-ENGINE/GONTI.CORE/Source/Memory/GtMemory.h>
-#include <GONTI-ENGINE/GONTI.CORE/Source/Logging/GtLogger.h>
-#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Inputs/GtInputs.h>
-#include <GONTI-ENGINE/GONTI.RUNTIME/Source/Application/GtApp.h>
+#include <GONTI-CORE/GONTI.CORE/Source/Memory/GtMemory.h>
+#include <GONTI-CORE/GONTI.CORE/Source/Logging/GtLogger.h>
+#include <GONTI-RUNTIME/GONTI.RUNTIME/Source/Inputs/GtInputs.h>
+#include <GONTI-RUNTIME/GONTI.RUNTIME/Source/Application/GtApp.h>
 
 static GtB8 isPaused = GtFalse;
 

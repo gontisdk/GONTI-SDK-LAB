@@ -2,41 +2,72 @@
 set -e
 
 # --- Configuration ---
-SDK_ROOT="../GONTI-SDK/GONTI/GONTI-ENGINE"
-SDK_ROOT_BIN="../GONTI-SDK/Build/bin/linux/GONTI/GONTI-ENGINE"
+SDK_ROOT="../GONTI-SDK/GONTI-SDK"
+SDK_ROOT_BIN="../GONTI-SDK/Build/bin/linux/GONTI-SDK"
 MAK_SRC_DIR="Build/Scripts/linux"
 OUT_TESTBED="Build/bin/Testbed"
 OUT_TESTS="Build/bin/Tests"
 MAK_FNAME_S="Makefile"
 MAK_FNAME_E="linux.mak"
-LIB_DIR="Lib/GONTI/GONTI-ENGINE"
-INCLUDE_DEST="./Include/GONTI/GONTI-ENGINE"
+LIB_DIR="Lib/GONTI-SDK"
+INCLUDE_DEST="./Include/GONTI-SDK"
+LIB_EXTENSION=".so"
 
-# Shared module list for libraries and headers
-MODULES=("GONTI.CORE" "GONTI.RENDER" "GONTI.RENDER.VK" "GONTI.RUNTIME")
+# Modules that produce a compiled library (.so) - used for lib copying.
+# Format: "ModuleName:RelativeGroupPath" (path relative to SDK_ROOT / SDK_ROOT_BIN)
+LIB_MODULES=(
+    "GONTI.CORE:GONTI-CORE"
+    "GONTI.CONTAINERS:GONTI-CORE"
+    "GONTI.MATH:GONTI-CORE"
+    "GONTI.STRING:GONTI-CORE"
+    "GONTI.FILESYSTEM:GONTI-CORE"
+    "GONTI.RENDER:GONTI-RENDER"
+    "GONTI.RENDER.CORE.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.DEBUGGER.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.SHADERS.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.UTILITIES.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RUNTIME:GONTI-RUNTIME"
+)
+
+# All modules that expose headers, including header-only ones (GONTI.RENDER.COMMON,
+# GONTI.RENDER.COMMON.VK) which have no compiled library but must still be collected.
+# Format: "ModuleName:RelativeGroupPath"
+HEADER_MODULES=(
+    "GONTI.CORE:GONTI-CORE"
+    "GONTI.CONTAINERS:GONTI-CORE"
+    "GONTI.MATH:GONTI-CORE"
+    "GONTI.STRING:GONTI-CORE"
+    "GONTI.FILESYSTEM:GONTI-CORE"
+    "GONTI.RENDER:GONTI-RENDER"
+    "GONTI.RENDER.COMMON:GONTI-RENDER"
+    "GONTI.RENDER.COMMON.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.CORE.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.DEBUGGER.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.SHADERS.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.UTILITIES.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RENDER.VK:GONTI-RENDER/GONTI-RENDER-VK"
+    "GONTI.RUNTIME:GONTI-RUNTIME"
+)
 
 # --- Helper Functions ---
 
-# Ensures a directory exists and is empty if requested
+# Ensures a directory exists
 prepare_dir() {
     local dir=$1
-    if [ -d "$dir" ]; then
-        # Optional: Uncomment to wipe existing files before re-copying
-        # rm -rf "$dir"/*
-        mkdir -p "$dir"
-    else
-        mkdir -p "$dir"
-    fi
+    mkdir -p "$dir"
 }
 
 # Copies shared libraries (.so)
 copy_engine_libs() {
     local dest=$1
     prepare_dir "$dest"
-    
+
     echo "Copying engine libraries to $dest..."
-    for module in "${MODULES[@]}"; do
-        local lib_path="$SDK_ROOT_BIN/$module.so"
+    for entry in "${LIB_MODULES[@]}"; do
+        local module="${entry%%:*}"
+        local group="${entry##*:}"
+        local lib_path="$SDK_ROOT_BIN/$group/$module$LIB_EXTENSION"
         if [ -f "$lib_path" ]; then
             cp -f "$lib_path" "$dest/"
         else
@@ -50,14 +81,16 @@ collect_headers() {
     echo "Collecting headers into $INCLUDE_DEST..."
     prepare_dir "$INCLUDE_DEST"
 
-    for module in "${MODULES[@]}"; do
-        local src_path="$SDK_ROOT/$module/Source"
-        local dest_path="$INCLUDE_DEST/$module/Source"
+    for entry in "${HEADER_MODULES[@]}"; do
+        local module="${entry%%:*}"
+        local group="${entry##*:}"
+        local src_path="$SDK_ROOT/$group/$module/Source"
+        local dest_path="$INCLUDE_DEST/$group/$module/Source"
 
         if [ -d "$src_path" ]; then
             echo "  -> Processing module: $module"
             prepare_dir "$dest_path"
-            
+
             # Using a more direct find/cp approach to avoid shell suspension
             # This version is less likely to hang in VS Code terminals
             find "$src_path" -type f \( -name "*.h" -o -name "*.inl" \) | while read -r file; do
